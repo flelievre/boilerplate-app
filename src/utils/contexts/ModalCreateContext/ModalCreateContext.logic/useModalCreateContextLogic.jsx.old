@@ -1,0 +1,127 @@
+import {
+  useState,
+  useEffect,
+  useContext,
+} from 'react';
+import useForm from '../../../hooks/useForm';
+import AppContext from '../../AppContext/AppContext';
+import useBoolean from '../../../hooks/useBoolean';
+
+const useModalCreateContextLogic = () => {
+  const [formConfig, setFormConfig] = useState({});
+  const [formInputs, setFormInputs] = useState({});
+
+  const {
+    t,
+    handleFormSubmission,
+    isMobile,
+  } = useContext(AppContext);
+
+  const {
+    fields = [],
+    areFormInputsInvalid = () => false,
+    formAction = () => {},
+    successMessageToDisplay = '',
+    successHandler = () => {},
+    title = '',
+    titleIcon = '',
+    contentText = '',
+    submitButtonText = '',
+    hideModalAfterAction = true,
+  } = formConfig;
+
+  const {
+    value: isShowingModal,
+    setTrue: showModal,
+    setFalse: hideModal,
+  } = useBoolean();
+
+  useEffect(() => {
+    if (fields.length > 0) {
+      setFormInputs(
+        fields.reduce((acc, field) => {
+          acc[field.name] = field.initValue;
+            return acc;
+          }, {}),
+      );
+    } else {
+      setFormInputs({});
+    }
+  }, [JSON.stringify(fields)]);
+
+  const [isFormLoading, setIsFormLoading] = useState(false);
+
+  const {
+    handleFormAction,
+    nbFormSubmissionCounter,
+    hasAnError,
+    resetNbFormSubmissionCounter,
+    ...formInputsErrorsHelpers
+  } = useForm({
+    isFormLoading,
+    setIsFormLoading,
+    handleFormSubmission,
+    formAction: async () => {
+      await formAction(formInputs);
+      if (hideModalAfterAction) {
+        hideModal();
+      }
+    },
+    areFormInputsInvalid,
+    inputsErrorsTexts: fields.reduce((acc, field) => {
+      acc[field.name] = field.errorHelper;
+      return acc;
+    }, {}),
+    successMessageToDisplay: t(successMessageToDisplay),
+    successHandler,
+    t,
+    ...formInputs,
+  });
+
+  useEffect(() => {
+    if (Object.keys(formInputs).length > 0) {
+      showModal();
+    } else {
+      hideModal();
+      resetNbFormSubmissionCounter();
+    }
+  }, [JSON.stringify(formInputs)]);
+
+  useEffect(() => {
+    if (!isShowingModal) {
+      resetNbFormSubmissionCounter();
+      setFormConfig({});
+    }
+  }, [isShowingModal]);
+
+  const handleChange = (fieldName) => ({ target }) => {
+    const {
+      valueFormatter = (v) => v,
+    } = fields.find((field) => field.name === fieldName);
+    setFormInputs((prev) => ({
+      ...prev,
+      [fieldName]: valueFormatter(target.value),
+    }));
+  };
+
+  return {
+    handleChange,
+    nbFormSubmissionCounter,
+    hasAnError,
+    handleFormAction,
+    formInputsErrorsHelpers,
+    isFormLoading,
+    setFormConfig,
+    isShowingModal,
+    title,
+    titleIcon,
+    contentText,
+    submitButtonText,
+    hideModal,
+    isMobile,
+    fields,
+    formInputs,
+  };
+};
+
+export default useModalCreateContextLogic;

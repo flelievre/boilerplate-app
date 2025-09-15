@@ -1,0 +1,5 @@
+import USERS_TABLE_HEADERS from './USERS_TABLE_HEADERS.jsx';
+
+export {
+  USERS_TABLE_HEADERS,
+};
