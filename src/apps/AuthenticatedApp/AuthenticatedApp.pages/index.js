@@ -4,6 +4,7 @@ import UserProfilePage from './Users/UserProfilePage/UserProfilePage';
 import InvitationsPage from './InvitationsPage/InvitationsPage';
 import OrganizationPage from './OrganizationPage/OrganizationPage';
 import SubscribePage from './SubscribePage/SubscribePage';
+import SubscriptionPaymentIntentPage from './SubscriptionPaymentIntentPage/SubscriptionPaymentIntentPage';
 
 export {
   DashboardPage,
@@ -12,4 +13,5 @@ export {
   InvitationsPage,
   OrganizationPage,
   SubscribePage,
+  SubscriptionPaymentIntentPage,
 };

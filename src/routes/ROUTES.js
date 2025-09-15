@@ -19,8 +19,11 @@ const ROUTES = {
   expired: 'expired',
   cancelled: 'cancelled',
   organizations: 'organizations',
+  organization: 'organizations/:organizationId',
   subscriptions: 'subscriptions',
   subscriptionFunnels: 'subscription-funnels',
+  subscriptionFunnel: 'subscription-funnels/:subscriptionFunnelId',
+  subscriptionFunnelPaymentIntent: 'subscription-funnels/:subscriptionFunnelId/payment-intents/:subscriptionPaymentIntentId',
   users: 'users',
   userPage: 'users/:userId/:activeTab',
   profile: 'profile',
@@ -33,6 +36,7 @@ const ROUTES = {
   invoices: 'invoices',
   security: 'security',
   subscribe: 'subscribe',
+  paymentIntents: 'payment-intents',
 };
 
 export default ROUTES;

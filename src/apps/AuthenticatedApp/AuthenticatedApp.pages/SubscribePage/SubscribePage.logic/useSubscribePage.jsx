@@ -129,18 +129,10 @@ const useSubscribePage = () => {
 
   const {
     _id = '',
-    amountTaxExcluded = 0,
-    createdAt = '',
     interval = '',
-    organization = '',
-    planMaxCredits = 0,
     planName = '',
     step = '',
     stripePriceId = '',
-    stripeProductId = '',
-    taxAmount = 0,
-    totalAmount = 0,
-    updatedAt = '',
   } = doc || {};
 
   const selectPlan = (stripePriceId) => {

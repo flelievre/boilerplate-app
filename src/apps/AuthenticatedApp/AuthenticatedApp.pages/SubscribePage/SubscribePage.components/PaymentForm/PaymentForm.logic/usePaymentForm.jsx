@@ -55,6 +55,7 @@ const usePaymentForm = ({
   const [currency, setCurrency] = useState('eur');
   const [amountTaxExcluded, setAmountTaxExcluded] = useState('');
   const [isFetchingPaymentIntent, setIsFetchingPaymentIntent] = useState(true);
+  const [stripeSubscriptionId, setStripeSubscriptionId] = useState('');
 
   const hasLoadedRef = useRef(null);
 
@@ -67,16 +68,16 @@ const usePaymentForm = ({
           totalAmount: totalAmountFromBackend,
           currency: currencyFromBackend,
           amountTaxExcluded: amountTaxExcludedFromBackend,
+          stripeSubscriptionId: stripeSubscriptionIdFromBackend,
         },
       },
-    } = await axios.requestWithAuth('post', `${VITE_BACKEND_URL}/organizations/${organizationId}/stripe-subscriptions`, {
-      subscriptionFunnelId,
-    });
+    } = await axios.requestWithAuth('post', `${VITE_BACKEND_URL}/organizations/${organizationId}/subscription-funnels/${subscriptionFunnelId}/stripe-subscriptions`);
     setClientSecret(clientSecretFromBackend);
     setTaxAmount(taxAmountFromBackend);
     setTotalAmount(totalAmountFromBackend);
     setCurrency(currencyFromBackend);
     setAmountTaxExcluded(amountTaxExcludedFromBackend);
+    setStripeSubscriptionId(stripeSubscriptionIdFromBackend);
     setIsFetchingPaymentIntent(false);
   };
 
@@ -86,32 +87,6 @@ const usePaymentForm = ({
     
     createStripeSubscription();
   }, []);
-
-  // useEffect(() => {
-  //   const fetchPaymentIntent = async () => {
-  //     const {
-  //       data: {
-  //         data: {
-  //           clientSecret: clientSecretFromBackend,
-  //           taxAmount: taxAmountFromBackend,
-  //           totalAmount: totalAmountFromBackend,
-  //           currency: currencyFromBackend,
-  //           amountTaxExcluded: amountTaxExcludedFromBackend,
-  //         } = {},
-  //       } = {},
-  //     } = await axios.requestWithAuth('post', `${VITE_BACKEND_URL}/organizations/${organizationId}/payment-intent`, {
-  //       priceId: selectedPriceId,
-  //     });
-  //     setClientSecret(clientSecretFromBackend);
-  //     setTaxAmount(taxAmountFromBackend);
-  //     setTotalAmount(totalAmountFromBackend);
-  //     setCurrency(currencyFromBackend);
-  //     setAmountTaxExcluded(amountTaxExcludedFromBackend);
-  //     setIsFetchingPaymentIntent(false);
-  //   };
-  //   fetchPaymentIntent();
-  // }, [selectedPriceId]);
-
 
   const shouldTaxBeAdded = taxExempt === 'none';
 
@@ -183,6 +158,7 @@ const usePaymentForm = ({
     elementOptions,
     clientSecret,
     goBack,
+    stripeSubscriptionId,
   };
 };
 

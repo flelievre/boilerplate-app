@@ -18,6 +18,7 @@ import usePaginationAndOrdering from './usePaginationAndOrdering.jsx';
 import usePaginatedSearchableData from './usePaginatedSearchableData.jsx';
 import useTableUtils from './useTableUtils.jsx';
 import useOnChangeEffect from './useOnChangeEffect.js';
+import useExecuteRegularly from './useExecuteRegularly.js';
 
 export {
   useStoredTimer,
@@ -40,4 +41,5 @@ export {
   usePaginatedSearchableData,
   useTableUtils,
   useOnChangeEffect,
+  useExecuteRegularly,
 };

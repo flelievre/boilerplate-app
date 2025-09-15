@@ -12,6 +12,7 @@ import {
   InvitationsPage,
   OrganizationPage,
   SubscribePage,
+  SubscriptionPaymentIntentPage,
 } from '../AuthenticatedApp.pages';
 import ROUTES from '@/routes';
 
@@ -31,7 +32,7 @@ const generateAuthenticatedRoutes = ({
       )}
     >
       <Route
-        path={`${ROUTES.organizations}/:organizationId`}
+        path={ROUTES.organization}
       >
         <Route
           path={ROUTES.userPage}
@@ -64,9 +65,15 @@ const generateAuthenticatedRoutes = ({
           )}
         />
         <Route
-          path={`${ROUTES.subscriptionFunnels}/:subscriptionFunnelId`}
+          path={ROUTES.subscriptionFunnel}
           element={(
             <SubscribePage />
+          )}
+        />
+        <Route
+          path={ROUTES.subscriptionFunnelPaymentIntent}
+          element={(
+            <SubscriptionPaymentIntentPage />
           )}
         />
         <Route

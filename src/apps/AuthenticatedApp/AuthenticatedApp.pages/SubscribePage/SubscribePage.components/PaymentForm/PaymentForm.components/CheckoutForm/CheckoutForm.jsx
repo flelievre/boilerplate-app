@@ -11,6 +11,8 @@ import {
 
 const CheckoutForm = ({
   clientSecret,
+  subscriptionFunnelId,
+  stripeSubscriptionId,
 }) => {
   const {
     t,
@@ -21,6 +23,8 @@ const CheckoutForm = ({
     isLoading,
   } = useCheckoutForm({
     clientSecret,
+    subscriptionFunnelId,
+    stripeSubscriptionId,
   });
   return (
     <>

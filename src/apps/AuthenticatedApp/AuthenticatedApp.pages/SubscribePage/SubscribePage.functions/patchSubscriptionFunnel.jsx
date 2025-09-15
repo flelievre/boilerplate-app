@@ -10,11 +10,13 @@ const patchSubscriptionFunnel = ({
   payload: {
     step = '',
     stripePriceId = '',
+    stripeSubscriptionId = '',
   } = {},
 }) => (
   axios.requestWithAuth('patch', `${VITE_BACKEND_URL}/${ROUTES.organizations}/${organizationId}/${ROUTES.subscriptionFunnels}/${subscriptionFunnelId}`, {
     step,
     stripePriceId,
+    stripeSubscriptionId,
   })
 );
 

@@ -43,6 +43,7 @@ const PaymentForm = ({
     priceListInfos,
     elementOptions,
     clientSecret,
+    stripeSubscriptionId,
   } = usePaymentForm({
     updateSubscriptionFunnel,
     subscriptionFunnelId,
@@ -188,6 +189,8 @@ const PaymentForm = ({
             <Elements stripe={stripe} options={elementOptions}>
               <CheckoutForm
                 clientSecret={clientSecret}
+                subscriptionFunnelId={subscriptionFunnelId}
+                stripeSubscriptionId={stripeSubscriptionId}
               />
             </Elements>
           </>
