@@ -8,6 +8,9 @@ import {
 import {
   useCheckoutForm,
 } from './CheckoutForm.logic';
+import {
+  Alert,
+} from '@mui/material';
 
 const CheckoutForm = ({
   clientSecret,
@@ -21,6 +24,7 @@ const CheckoutForm = ({
     hasAnError,
     nbFormSubmissionCounter,
     isLoading,
+    errorMessage,
   } = useCheckoutForm({
     clientSecret,
     subscriptionFunnelId,
@@ -29,9 +33,20 @@ const CheckoutForm = ({
   return (
     <>
       <PaymentElement />
+      {errorMessage && (
+        <Alert
+          severity="error"
+          sx={{
+            mt: 2,
+          }}
+        >
+          {errorMessage}
+        </Alert>
+      )}
       <SubmitButton
         defaultContent={t('Subscribe')}
-        errorContent={t('Error')}
+        errorContent={t(errorMessage)}
+        errorMessage={errorMessage}
         shouldShowErrorState={hasAnError}
         nbClick={nbFormSubmissionCounter}
         loading={isLoading}

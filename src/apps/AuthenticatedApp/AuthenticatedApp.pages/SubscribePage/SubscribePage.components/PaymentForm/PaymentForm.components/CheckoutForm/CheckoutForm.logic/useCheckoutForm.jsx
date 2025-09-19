@@ -42,6 +42,7 @@ const useCheckoutForm = ({
 
   const [isLoading, setIsLoading] = useState(false);
   const [hasAnError, setHasAnError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
 
   const {
     incrementCounter: incrementNbFormSubmissionCounter,
@@ -51,6 +52,7 @@ const useCheckoutForm = ({
   const handleSubmit = async () => {
     setIsLoading(true);
     setHasAnError(false);
+    setErrorMessage('');
     let subscriptionPaymentIntentId = '';
 
     try {
@@ -126,6 +128,7 @@ const useCheckoutForm = ({
         param,
       });
       setHasAnError(true);
+      setErrorMessage(message);
       setIsLoading(false);
       incrementNbFormSubmissionCounter();
     }
@@ -138,6 +141,7 @@ const useCheckoutForm = ({
     hasAnError,
     nbFormSubmissionCounter,
     t,
+    errorMessage,
   };
 };
 

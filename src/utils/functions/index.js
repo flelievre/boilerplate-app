@@ -10,3 +10,4 @@ export * from './dates';
 export * from './payments';
 export * from './types';
 export * from './sockets';
+export * from './time';

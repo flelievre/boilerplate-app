@@ -10,6 +10,7 @@ import {
 import {
   useOutletContext,
   useParams,
+  useNavigate,
 } from 'react-router';
 import {
   AppContext,
@@ -20,20 +21,22 @@ import {
   axios,
   VITE_BACKEND_URL,
 } from '@/config';
+import ROUTES from '@/routes';
 import {
   patchSubscriptionFunnel,
 } from '../SubscribePage.functions';
 
 const useSubscribePage = () => {
   const {
-    t,
-  } = useContext(AppContext);
-
-  const {
     currentOrganization: {
       _id: organizationId = '',
+      subscription = null,
     } = {},
+    startFunnelOrManageSubscription,
+    generateOrganizationRoute,
   } = useOutletContext();
+
+  const navigate = useNavigate();
 
   const [
     products,
@@ -56,12 +59,33 @@ const useSubscribePage = () => {
 
   const {
     doc,
+    error,
     isLoading: isInitializingListener,
   } = useDocSocket({
     docType: 'subscriptionFunnel',
     docId: subscriptionFunnelId,
     isAuthorized: true,
   });
+
+
+  useEffect(() => {
+    if (!!subscription) {
+      navigate(generateOrganizationRoute(`${ROUTES.settings}/${ROUTES.information}`), { replace: true });
+    }
+  }, [subscription]);
+
+  useEffect(() => {
+    if (
+      !isInitializingListener
+      && !subscription
+      && (
+        error
+        || (doc?.step === 'payment_completed')
+      )
+    ) {
+      startFunnelOrManageSubscription();
+    }
+  }, [error, isInitializingListener, doc?.step, subscription]);
 
   const {
     value: isShowingMonthlyPrice,

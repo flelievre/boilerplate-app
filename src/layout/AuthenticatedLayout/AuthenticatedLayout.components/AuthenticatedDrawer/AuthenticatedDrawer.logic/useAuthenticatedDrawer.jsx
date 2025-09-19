@@ -5,16 +5,10 @@ import {
   AppContext,
   useAnchor,
 } from '@/utils';
-import {
-  axios,
-  VITE_BACKEND_URL,
-} from '@/config';
 import ROUTES from '@/routes';
 
 const useAuthenticatedDrawer = ({
   currentOrganization = {},
-  generateOrganizationRoute = () => {},
-  navigate = () => {},
 }) => {
   const {
     t,
@@ -22,18 +16,24 @@ const useAuthenticatedDrawer = ({
   } = useContext(AppContext);
 
   const {
-    credits,
-    plan,
-    planMaxCredits,
-    creditsProgressBarValue,
-    hasSubscription,
-  } = {
-    credits: 0,
-    plan: 'free',
-    planMaxCredits: 1000,
-    creditsProgressBarValue: 0,
-    hasSubscription: false,
-  };
+    credits: currentSubscriptionCredits = 0,
+    subscription = null,
+    freeTrialMaxCredits = 500,
+    freeTrialCreditsLeft = 500,
+  } = currentOrganization;
+
+  const hasSubscription = !!subscription;
+
+  const credits = hasSubscription
+    ? currentSubscriptionCredits
+    : freeTrialCreditsLeft;
+
+  const {
+    planMaxCredits = freeTrialMaxCredits,
+    planName = 'Free',
+  } = subscription || {};
+
+  const creditsProgressBarValue = (credits / planMaxCredits) * 100;
 
   const {
     anchorEl: anchorProfileMenuEl,
@@ -61,25 +61,11 @@ const useAuthenticatedDrawer = ({
     },
   ];
 
-  const handleUpgradeOrManageSubscriptionClick = async () => {
-    const {
-      data: {
-        data: {
-          subscriptionFunnel: {
-            _id: subscriptionFunnelId = '',
-          } = {},
-        } = {},
-      } = {},
-    } = await axios.requestWithAuth('post', `${VITE_BACKEND_URL}/${ROUTES.organizations}/${currentOrganization._id}/${ROUTES.subscriptionFunnels}`);
-
-    await navigate(generateOrganizationRoute(`${ROUTES.subscriptionFunnels}/${subscriptionFunnelId}`));
-  };
-
   return {
     t,
     isMobile,
     credits,
-    plan,
+    planName,
     planMaxCredits,
     creditsProgressBarValue,
     hasSubscription,
@@ -88,7 +74,6 @@ const useAuthenticatedDrawer = ({
     handleProfileButtonClick,
     handleProfileButtonClose,
     bottomDrawerLinks,
-    handleUpgradeOrManageSubscriptionClick,
   };
 };
 

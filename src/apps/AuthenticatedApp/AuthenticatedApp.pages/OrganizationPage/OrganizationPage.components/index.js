@@ -1,12 +1,12 @@
 import {
-  InformationTab,
-} from './InformationTab';
+  PlanTab,
+} from './PlanTab';
 import {
   AddressTab,
 } from './AddressTab';
 import {
-  BillingTab,
-} from './BillingTab';
+  PaymentMethodsTab,
+} from './PaymentMethodsTab';
 import {
   InvoicesTab,
 } from './InvoicesTab';
@@ -15,9 +15,9 @@ import {
 } from './SecurityTab';
 
 export {
-  InformationTab,
+  PlanTab,
   AddressTab,
-  BillingTab,
+  PaymentMethodsTab,
   InvoicesTab,
   SecurityTab,
 };

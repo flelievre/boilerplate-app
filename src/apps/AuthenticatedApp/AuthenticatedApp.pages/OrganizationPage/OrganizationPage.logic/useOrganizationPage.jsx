@@ -22,24 +22,24 @@ const useOrganizationPage = () => {
   const tabInfos = [
     {
       routeTo: ROUTES.information,
-      label: t('Information'),
-      key: 'information',
-      icon: 'heroicons:information-circle-solid',
-      subLabel: t('Organization details and information'),
+      label: t('Plan'),
+      key: 'plan',
+      icon: 'clarity:blocks-group-solid',
+      subLabel: t('Manage your subscription'),
     },
     {
       routeTo: ROUTES.address,
-      label: t('Address'),
+      label: t('Billing address'),
       key: 'address',
       icon: 'heroicons:map-pin-solid',
-      subLabel: t('Organization address and location'),
+      subLabel: t('Manage your billing address'),
     },
     {
       routeTo: 'billing',
-      label: t('Billing'),
+      label: t('Payment methods'),
       key: 'billing',
       icon: 'heroicons:credit-card-solid',
-      subLabel: t('Billing information and payment methods'),
+      subLabel: t('Manage your payment methods'),
     },
     {
       routeTo: 'invoices',
@@ -53,7 +53,7 @@ const useOrganizationPage = () => {
       label: t('Security'),
       key: 'security',
       icon: 'heroicons:shield-check-solid',
-      subLabel: t('Security settings and permissions'),
+      subLabel: t('Security settings'),
     },
   ];
 

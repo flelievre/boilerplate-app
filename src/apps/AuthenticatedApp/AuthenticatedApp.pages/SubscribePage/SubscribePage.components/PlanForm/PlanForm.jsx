@@ -63,7 +63,7 @@ const PlanForm = ({
         {t('You can upgrade it at any time')}
       </Typography>
       <Divider flexItem />
-      <Typography variant="caption" sx={{ color: 'text.secondary', py: 2 }}>
+      <Typography variant="caption" sx={{ color: 'text.primary', py: 2 }}>
         <b>{`“${t('With SaveDevTime, boosting significatively our security was as simple as a few lines of code')}.“`}</b>
         <br />
         {t('F. Smith, CTO, BERN')}
@@ -99,23 +99,23 @@ const PlanForm = ({
           onChange={toggleYearlyOrMonthlyPrice}
           sx={{
             '& .MuiSwitch-switchBase': {
-              color: 'primary.main', // Thumb color when unchecked
+              color: 'primary.light', // Thumb color when unchecked
               '&:hover': {
                 backgroundColor: 'rgba(25, 118, 210, 0.08)', // Slight hover effect for better UX
               },
             },
             '& .MuiSwitch-switchBase.Mui-checked': {
-              color: 'primary.main', // Thumb color when checked
+              color: 'primary.light', // Thumb color when checked
               '&:hover': {
                 backgroundColor: 'rgba(25, 118, 210, 0.08)', // Hover effect
               },
             },
             '& .MuiSwitch-track': {
-              backgroundColor: 'primary.dark', // Track color (always secondary)
+              backgroundColor: 'primary.dark',
               opacity: 1, // Make it solid
             },
             '& .MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track': {
-              backgroundColor: 'primary.dark', // Track color when checked
+              backgroundColor: 'primary.dark',
               opacity: 1,
             },
           }}
@@ -125,7 +125,7 @@ const PlanForm = ({
           color={(
             isShowingMonthlyPrice
               ? 'primary.main'
-              : 'neutral.main'
+              : 'inherit'
           )}
           sx={{
             fontSize: '1em',
@@ -229,7 +229,7 @@ const PlanForm = ({
                     variant="caption"
                     sx={{
                       ml: 1,
-                      color: 'text.secondary',
+                      color: 'text.primary',
                     }}
                   >
                     {t('tax excluded')}
@@ -281,7 +281,7 @@ const PlanForm = ({
                   )}
                   color={(
                     (index === 1)
-                      ? 'secondary'
+                      ? 'primary'
                       : 'primary'
                   )}
                 >

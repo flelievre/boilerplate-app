@@ -8,6 +8,7 @@ import {
 import {
   AppContext,
   ModalCreateContext,
+  sleep,
 } from '@/utils';
 import {
   EMPLOYEE_COUNT_OPTIONS,
@@ -59,12 +60,14 @@ const useOrganizationSelect = ({
       submitButtonText: t('Add'),
       successMessageToDisplay: t('Organization added'),
       hideModalAfterAction: true,
-      formAction: ({ name, employeeCount }) => (
-        axios.requestWithAuth('post', `${VITE_BACKEND_URL}/organizations`, {
+      formAction: async ({ name, employeeCount }) => {
+        const res = await axios.requestWithAuth('post', `${VITE_BACKEND_URL}/organizations`, {
           name,
           employeeCount,
-        })
-      ),
+        });
+        await sleep(1000);
+        return res;
+      },
       successHandler: (data) => {
         navigate(generateOrganizationRoute(ROUTES.dashboard, data.data.organizationId));
       },

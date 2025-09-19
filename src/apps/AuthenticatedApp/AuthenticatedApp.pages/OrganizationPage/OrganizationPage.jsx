@@ -8,9 +8,9 @@ import {
   Typography,
 } from '@mui/material';
 import {
-  InformationTab,
+  PlanTab,
   AddressTab,
-  BillingTab,
+  PaymentMethodsTab,
   InvoicesTab,
   SecurityTab,
 } from './OrganizationPage.components';
@@ -57,13 +57,13 @@ const OrganizationPage = () => {
         }}
       />
       {activeTabIndex === 0 && (
-        <InformationTab />
+        <PlanTab />
       )}
       {activeTabIndex === 1 && (
         <AddressTab />
       )}
       {activeTabIndex === 2 && (
-        <BillingTab />
+        <PaymentMethodsTab />
       )}
       {activeTabIndex === 3 && (
         <InvoicesTab />

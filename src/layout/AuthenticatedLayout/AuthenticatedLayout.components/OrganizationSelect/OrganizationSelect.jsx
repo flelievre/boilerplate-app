@@ -64,7 +64,6 @@ const OrganizationSelect = ({
       <Box
         sx={{
           maxHeight: 200,
-          overflowX: 'scroll',
           overflowY: 'auto',
           whiteSpace: 'nowrap',
         }}

@@ -15,6 +15,7 @@ const createDocumentSocket = ({
   setActiveSocketId,
   renewSocket,
   resetSocket,
+  setError,
 }) => {
   const socket = io.connect(`${VITE_BACKEND_URL}/doc/${docType}`, {
     auth: {
@@ -40,6 +41,7 @@ const createDocumentSocket = ({
     console.log('docInitial', data);
     setDoc({ ...data });
     setIsLoading(false);
+    setError(null);
   });
 
   socket.on('docUpdate', ({ data }) => {
@@ -48,18 +50,21 @@ const createDocumentSocket = ({
       deepMerge({ ...prevDocument }, { ...data })
     ));
     setIsLoading(false);
+    setError(null);
   });
 
   socket.on('docDelete', (deletedDocId) => {
     console.log('docDelete', deletedDocId);
     setDoc(null);
     setIsLoading(false);
+    setError('Document deleted');
   });
 
   socket.on('docReplace', ({ data }) => {
     console.log('docReplace', data);
     setDoc({ ...data });
     setIsLoading(false);
+    setError(null);
   });
 
   socket.on('docSubscribed', (data) => {
@@ -77,18 +82,22 @@ const createDocumentSocket = ({
     console.log('docRefresh', data);
     setDoc({ ...data });
     setIsLoading(false);
+    setError(null);
   });
 
   socket.on('docAccessRevoked', (data) => {
     console.log('docAccessRevoked', data);
     setDoc(null);
     setIsLoading(false);
+    setError('Access revoked');
     // Could trigger additional cleanup or redirect logic
   });
 
   socket.on('docError', (error) => {
     console.log('docError', error);
+    setDoc(null);
     setIsLoading(false);
+    setError('Error');
     // Could trigger error handling or user notification
   });
 

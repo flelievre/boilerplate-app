@@ -138,56 +138,68 @@ const AddressForm = ({
         </Grid>
         <Grid size={12}>
           <Typography
-            variant="caption"
+            component="span"
             color={(
               isCompany
-                ? 'neutral.main'
+                ? 'inherit'
                 : 'primary.main'
             )}
             sx={{
+              opacity: isCompany
+                ? 0.5
+                : 1,
+              fontWeight: isCompany
+                ? 500
+                : 600,
               fontSize: '1.2em',
             }}
           >
-            <b>{t('Individual')}</b>
+            {t('Individual')}
           </Typography>
           <Switch
             checked={isCompany}
             onChange={toggleIsCompany}
             sx={{
               '& .MuiSwitch-switchBase': {
-                color: 'primary.main', // Thumb color when unchecked
+                color: 'primary.light', // Thumb color when unchecked
                 '&:hover': {
                   backgroundColor: 'rgba(25, 118, 210, 0.08)', // Slight hover effect for better UX
                 },
               },
               '& .MuiSwitch-switchBase.Mui-checked': {
-                color: 'primary.main', // Thumb color when checked
+                color: 'primary.light', // Thumb color when checked
                 '&:hover': {
                   backgroundColor: 'rgba(25, 118, 210, 0.08)', // Hover effect
                 },
               },
               '& .MuiSwitch-track': {
-                backgroundColor: 'secondary.main', // Track color (always secondary)
+                backgroundColor: 'primary.dark', // Track color (always secondary)
                 opacity: 1, // Make it solid
               },
               '& .MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track': {
-                backgroundColor: 'secondary.main', // Track color when checked
+                backgroundColor: 'primary.dark', // Track color when checked
                 opacity: 1,
               },
             }}
           />
           <Typography
-            variant="caption"
+            component="span"
             color={(
               isCompany
                 ? 'primary.main'
-                : 'neutral.main'
+                : 'inherit'
             )}
             sx={{
               fontSize: '1.2em',
+              opacity: isCompany
+                ? 1
+                : 0.5,
+              fontWeight: isCompany
+                ? 600
+                : 400,
             }}
           >
-            <b>{t('Company')}</b>
+            {t('Company')}
           </Typography>
         </Grid>
         {isCompany && (

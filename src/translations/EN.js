@@ -27,6 +27,9 @@ const EN = {
   'Your invitation to join {organizationName} has been cancelled': 'Your invitation to join {organizationName} has been cancelled',
   '{recipientDisplayName} declined to join {organizationName}': '{recipientDisplayName} declined to join {organizationName}',
   'Are you sure you want to resend the invitation sent to {email}?': 'Are you sure you want to resend the invitation sent to {email}?',
+  'Hello,\n\nThe application encounters an error when retrieving the status of my payment.\nCan you please investigate the issue and come back to me as soon as possible?\n\nHere is the link where the error occurred and my account information:\n\n- Link: {link}\n- Email: {authUserEmail}\n- ID: {authUserId}\n\nBest regards,\n{authUserFirstName} {authUserLastName}': 'Hello,\n\nThe application encounters an error when retrieving the status of my payment.\nCan you please investigate the issue and come back to me as soon as possible?\n\nHere is the link where the error occurred and my account information:\n\n- Link: {link}\n- Email: {authUserEmail}\n- ID: {authUserId}\n\nBest regards,\n{authUserFirstName} {authUserLastName}',
+  'Your payment was successfuly processed on the {formattedSubscriptionPaymentIntentUpdatedAt}.': 'Your payment was successfuly processed on the {formattedSubscriptionPaymentIntentUpdatedAt}.',
+  'Your {planName} plan is now active! You can enjoy {planMaxCredits} monthly credits and, if needed, can upgrade anytime.': 'Your {planName} plan is now active! You can enjoy {planMaxCredits} monthly credits and, if needed, can upgrade anytime.',
 };
 
 export default EN;

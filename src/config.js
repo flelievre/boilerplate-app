@@ -10,6 +10,7 @@ const {
   VITE_NODE_ENV,
   VITE_RECAPTCHA_SITEKEY,
   VITE_STRIPE_PUBLIC_KEY,
+  VITE_SUPPORT_EMAIL,
 } = import.meta.env;
 
 let isRefreshing = false;
@@ -133,5 +134,6 @@ export {
   VITE_RECAPTCHA_SITEKEY,
   ROWS_PER_PAGE_OPTIONS,
   stripe,
+  VITE_SUPPORT_EMAIL,
 };
 

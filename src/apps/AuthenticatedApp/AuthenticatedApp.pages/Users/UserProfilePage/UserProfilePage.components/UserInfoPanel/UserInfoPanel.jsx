@@ -28,8 +28,7 @@ const UserInfoPanel = ({
     <TabPanel value={activeTabIndex} index={0}>
       <Typography
         component="h2"
-        variant="subtitle1"
-        color="secondary"
+        color="primary.main"
       >
         {t('Profile')}
       </Typography>

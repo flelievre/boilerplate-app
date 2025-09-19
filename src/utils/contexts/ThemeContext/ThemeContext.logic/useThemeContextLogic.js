@@ -37,8 +37,6 @@ const useThemeContextLogic = () => {
     return responsiveFontSizes(withComponents);
   }, [themeName]);
 
-  console.log(theme);
-
   const toggleTheme = () => {
     if (themeName === 'dark') {
       setThemeName('light');

@@ -1,6 +1,9 @@
 import {
   useEffect,
 } from 'react';
+import {
+  format,
+} from 'date-fns';
 import { fr, enUS } from 'date-fns/locale';
 import createPersistedState from 'use-persisted-state';
 import {
@@ -55,6 +58,8 @@ const useTranslationContextLogic = ({
 
   const fromNow = (date) => fromNowWithoutLocale(date, dateFnsLocale);
 
+  const formatDate = (date) => format(date, 'd MMMM yyyy', { locale: dateFnsLocale });
+
   return {
     APP_SUPPORTED_LANGUAGES: Object.keys(translations),
     lang,
@@ -62,6 +67,7 @@ const useTranslationContextLogic = ({
     generateRoute,
     dateFnsLocale,
     fromNow,
+    formatDate,
     t,
   };
 };

@@ -1,1 +1,3 @@
-// Address tab functions will be added here as needed
+export {
+  default as areAddressInputsInvalid,
+} from './areAddressInputsInvalid';

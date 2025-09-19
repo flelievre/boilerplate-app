@@ -194,6 +194,26 @@ const useAuthenticatedLayout = () => {
 
   const firstOrganizationDashboardRoute = generateOrganizationRoute(ROUTES.dashboard, organizations[0]._id);
 
+  const startSubscriptionFunnel = async () => {
+    const {
+      data: {
+        data: {
+          subscriptionFunnel: {
+            _id: subscriptionFunnelId = '',
+          } = {},
+        } = {},
+      } = {},
+    } = await axios.requestWithAuth('post', `${VITE_BACKEND_URL}/${ROUTES.organizations}/${currentOrganization._id}/${ROUTES.subscriptionFunnels}`);
+
+    await navigate(generateOrganizationRoute(`${ROUTES.subscriptionFunnels}/${subscriptionFunnelId}`));
+  };
+
+  const startFunnelOrManageSubscription = async () => {
+    currentOrganization.subscription
+      ? navigate(generateOrganizationRoute(`${ROUTES.settings}/${ROUTES.information}`))
+      : startSubscriptionFunnel();
+  };
+
   return {
     t,
     lang,
@@ -223,6 +243,7 @@ const useAuthenticatedLayout = () => {
     authUserHabilitations,
     generateRoute,
     bottomDrawerLinks,
+    startFunnelOrManageSubscription,
   };
 };
 

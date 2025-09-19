@@ -65,6 +65,7 @@ const TableContainer = ({
   addItemTooltip = 'Add item',
   tableAddButtonLabel = 'Create',
   showSublineColumnLabel = 'See more',
+  showTotal = true,
 }) => {
   const colSpan = tableHeaders
     .filter(({ hiddenOnMobile = false }) => (
@@ -207,7 +208,9 @@ const TableContainer = ({
           onPageChange={handleChangePage}
           onRowsPerPageChange={handleChangeRowsPerPage}
           labelDisplayedRows={({ from, to, count }) => (
-            t('{from}–{to} of {count}', { from, to, count })
+            showTotal
+              ? t('{from}–{to} of {count}', { from, to, count })
+              : ''
           )}
         />
       )}

@@ -1,1 +1,3 @@
-// Address tab constants will be added here as needed
+export {
+  default as ADDRESS_INPUTS_ERRORS_TEXTS,
+} from './ADDRESS_INPUTS_ERRORS_TEXTS';

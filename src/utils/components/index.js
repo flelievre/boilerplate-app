@@ -12,3 +12,4 @@ export * from './avatars';
 export * from './chips';
 export * from './search';
 export * from './tables';
+export * from './alerts';

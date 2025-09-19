@@ -42,6 +42,7 @@ const AuthenticatedLayout = () => {
     authUserHabilitations,  
     generateRoute,
     bottomDrawerLinks,
+    startFunnelOrManageSubscription,
   } = useAuthenticatedLayout();
 
   return (
@@ -82,22 +83,27 @@ const AuthenticatedLayout = () => {
         isMobile={isMobile}
         signOut={signOut}
         authUserId={authUserId}
+        startFunnelOrManageSubscription={startFunnelOrManageSubscription}
       />
       <Box
         component="main"
         sx={(theme) => ({
           flexGrow: 1,
           px: 3,
-          pt: isMobile
-            ? '110px'
-            : '72px',
+          pt: {
+            xs: '110px',
+            sm: '120px',
+            md: '72px',
+          },
           marginLeft: (isDrawerOpen && !isMobile)
             ? '240px'
             : 0,
+          pb: 10,
           transition: theme.transitions.create('margin-left', {
             easing: theme.transitions.easing.sharp,
             duration: theme.transitions.duration.enteringScreen,
           }),
+          overflowX: 'auto',
         })}
       >
         <Outlet
@@ -107,6 +113,7 @@ const AuthenticatedLayout = () => {
             currentOrganization,
             generateOrganizationRoute,
             authUserHabilitations,
+            startFunnelOrManageSubscription,
           }}
         />
       </Box>

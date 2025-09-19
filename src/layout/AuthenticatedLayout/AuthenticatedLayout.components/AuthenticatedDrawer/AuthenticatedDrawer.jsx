@@ -46,6 +46,7 @@ const AuthenticatedDrawer = ({
   activeDrawerLinkKey = '',
   closeDrawerIfMobile = () => {},
   generateOrganizationRoute = () => {},
+  startFunnelOrManageSubscription = () => {},
   navigate = () => {},
   signOut = () => {},
   firstName = '',
@@ -58,19 +59,16 @@ const AuthenticatedDrawer = ({
     t,
     showLoadingBar,
     credits,
-    plan,
+    planName,
     planMaxCredits,
-    creditsProgressBarValue,
     hasSubscription,
+    creditsProgressBarValue,
     anchorProfileMenuEl,
     isProfileMenuOpen,
     handleProfileButtonClick,
     handleProfileButtonClose,
-    handleUpgradeOrManageSubscriptionClick,
   } = useAuthenticatedDrawer({
     currentOrganization,
-    generateOrganizationRoute,
-    navigate,
   });
 
   return (
@@ -156,7 +154,7 @@ const AuthenticatedDrawer = ({
               variant="body2"
               textAlign="center"
             >
-              <b>{t(plan || '')}</b>
+              <b>{t(planName || '')}</b>
             </Typography>
             <Typography
               variant="caption"
@@ -175,7 +173,7 @@ const AuthenticatedDrawer = ({
             />
             <Button
               variant="contained"
-              onClick={() => handleUpgradeOrManageSubscriptionClick()}
+              onClick={() => startFunnelOrManageSubscription()}
               fullWidth
               size="small"
               sx={{

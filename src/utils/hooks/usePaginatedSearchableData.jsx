@@ -40,6 +40,8 @@ const usePaginatedSearchableData = ({
     skip: fetchSkip = 0,
     limit: fetchLimit = rowsPerPage,
     search: fetchSearchTerm = '',
+    startingAfter: fetchStartingAfter,
+    endingBefore: fetchEndingBefore,
   }) => {
     try {
       const {
@@ -53,6 +55,8 @@ const usePaginatedSearchableData = ({
         limit: +fetchLimit,
         search: fetchSearchTerm,
         filters,
+        startingAfter: fetchStartingAfter,
+        endingBefore: fetchEndingBefore,
       });
       setShowingDocuments(
         (collection.length > fetchLimit)
@@ -75,6 +79,16 @@ const usePaginatedSearchableData = ({
   useEffect(() => {
     if (isMovingBackward) {
       setIsLoading(true);
+      const firstDocument = (showingDocuments.length > 0)
+        ? showingDocuments[0]
+        : {};
+      const {
+        id = undefined,
+        _id = undefined,
+      } = firstDocument;
+      const endingBefore = (page > 0)
+        ? (_id  || id)
+        : undefined;
       const skip = page > 0
         ? page * rowsPerPage
         : undefined;
@@ -85,9 +99,20 @@ const usePaginatedSearchableData = ({
         skip,
         limit: rowsPerPage,
         search: searchTerm,
+        endingBefore,
       });
     } else if (isMovingForward) {
       setIsLoading(true);
+      const lastDocument = (showingDocuments.length > 0)
+        ? showingDocuments[showingDocuments.length - 1]
+        : {};
+      const {
+        id = undefined,
+        _id = undefined,
+      } = lastDocument;
+      const startingAfter = (page >= 0)
+        ? (_id  || id)
+        : undefined;
       const skip = page >= 0
         ? page * rowsPerPage
         : undefined;
@@ -98,6 +123,7 @@ const usePaginatedSearchableData = ({
         skip,
         limit: rowsPerPage,
         search: searchTerm,
+        startingAfter,
       });
     }
     setIsMovingForward(false);

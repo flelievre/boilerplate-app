@@ -32,7 +32,6 @@ import {
 
 const useAddressForm = ({
   updateSubscriptionFunnel = () => {},
-  stripePriceId = '',
 } = {}) => {
   const {
     currentOrganization: {
@@ -59,7 +58,11 @@ const useAddressForm = ({
     toggleValue: toggleIsCompany,
   } = useBoolean({ defaultValue: organizationIsCompany });
   const [isAddressFormLoading, setIsAddressFormLoading] = useState(false);
-  const [legalName, setLegalName] = useState(organizationLegalName);
+  const [legalName, setLegalName] = useState(
+    organizationIsCompany
+      ? organizationLegalName
+      : '',
+  );
   const [addressLine1, setAddressLine1] = useState(organizationAddressLine1);
   const [addressLine2, setAddressLine2] = useState(organizationAddressLine2);
   const [city, setCity] = useState(organizationCity);
@@ -150,8 +153,8 @@ const useAddressForm = ({
     t,
     errorHandler: (e) => {
       if (
-        (e === 'tax number is invalid')
-        || (e === 'tax is not available for this country')
+        (e === 'Tax number is invalid')
+        || (e === 'Tax is not available for this country')
       ) {
         setTaxNumberErrorFromBackendHelper(t(e));
       }

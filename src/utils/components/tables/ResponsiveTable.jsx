@@ -59,6 +59,7 @@ const ResponsiveTable = ({
   tableAddButtonLabel = 'Create',
   showTableAddbutton = true,
   showSublineColumnLabel = '',
+  showTotal = true,
 }) => {
   const hasFilters = (filtersTabData.length > 0);
   return (
@@ -89,6 +90,7 @@ const ResponsiveTable = ({
         />
       )}
       <TableContainer
+        showTotal={showTotal}
         addItemTooltip={addItemTooltip}
         tableAddButtonLabel={tableAddButtonLabel}
         showTableAddbutton={showTableAddbutton}

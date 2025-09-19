@@ -13,6 +13,7 @@ const useDocSocket = ({
   isAuthorized,
 }) => {
   const [doc, setDoc] = useState(null);
+  const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const {
     counter: socketRenewTrigger,
@@ -40,6 +41,7 @@ const useDocSocket = ({
         setActiveSocketId,
         renewSocket,
         resetSocket,
+        setError,
       });
     } else {
       socketRef?.current?.disconnect();
@@ -47,6 +49,7 @@ const useDocSocket = ({
       setDoc(null);
       setIsLoading(false);
       setActiveSocketId('');
+      setError(null);
     }
   }, [socketRenewTrigger, isAuthorized, authLocalStorageChanged, docType, docId]);
   
@@ -69,6 +72,7 @@ const useDocSocket = ({
   return {
     doc,
     isLoading,
+    error,
   };
 };
 
